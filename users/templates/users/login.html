@@ -1,0 +1,46 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{%block content %}
+
+
+        <div class="container">
+              <!--Navbar-->
+         
+        
+              <!--/.Navbar-->
+            <div class="container mt-5">
+              <div class="d-flex justify-content-center">
+
+                          
+                        <!-- Default form register -->
+            <form class="text-center border border-light p-5" action="#!" method="POST">
+              {% csrf_token %}
+
+                  <p class="h4 mb-4">Connexion</p>
+              
+                          {{ form | crispy }}
+              
+                  <!-- Sign up button -->
+                  <button class="btn btn-info my-4 btn-block" type="submit">Connexion</button>
+                  <small class="text-muted ml-2">
+                     <a href="{% url 'password_reset' %}">Mot de pass oublié ?</a>
+                  </small>
+              </form>
+           
+              </div>
+             
+            </div>             
+            <br>  
+                   
+              <div class="d-flex justify-content-center">
+                    
+                    <small class="text-muted">Pas de compte  ?
+                            <a class="ml-2" href="{% url 'register' %}">Inscription</a>
+                              
+                          </small>
+                </div>
+         
+        </div>
+
+     
+{% endblock content %}

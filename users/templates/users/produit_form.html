@@ -1,0 +1,94 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{%block content %}
+
+<main>
+        <div class="container">
+    
+          <!--Navbar-->
+          <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
+    
+            <!-- Navbar brand -->
+            <span class="navbar-brand">Categories:</span>
+    
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+              aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="basicExampleNav">
+    
+              <!-- Links -->
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">All
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Shirts</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Sport wears</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Outwears</a>
+                </li>
+    
+              </ul>
+              <!-- Links -->
+    
+              <form class="form-inline">
+                <div class="md-form my-0">
+                  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                </div>
+              </form>
+            </div>
+            <!-- Collapsible content -->
+    
+          </nav>
+          <!--/.Navbar-->
+    
+          <!--Section: Products v.3-->
+    <div class="container">
+            <div class="container">
+                    <div class="row m-y-2">
+                        <div class="col-lg-8 push-lg-4">
+                            <ul class="nav nav-tabs">
+                               
+                                <li class="nav-item">
+                                  <h3> <i><b>Nouveau Produit</b></i></h3>
+                                  
+                                </li>
+                            </ul>
+                           
+                                
+                                <div class="tab-pane" id="edit">
+                                   
+                                    <form class="" action="#!" method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                              
+                                            
+                                                        {{ form | crispy }}
+                                                      
+                                            
+                                                <!-- Sign up button -->
+                                                <button class="btn btn-info my-4 btn-block" type="submit">Publier</button>
+                                            
+                                            
+                                            </form>
+                                      
+                                        
+                                   
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+                <hr>
+    </div>
+
+{% endblock content %}

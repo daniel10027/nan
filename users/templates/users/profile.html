@@ -1,0 +1,151 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{%block content %}
+
+<main>
+        <div class="container mt-5">
+    
+      <div class="container">
+            <div class="container">
+                    <div class="row m-y-2">
+                        <div class="col-lg-8 push-lg-4">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Messages</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Mettre à jour </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content p-b-3">
+                                <br>
+                                <div class="tab-pane active" id="profile">
+                                    <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right">Profile Utilisateur</span></h4>
+                                    <br><br>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6>Nom d'Utilisateur : <strong>{{ user.username}}</strong></h6>
+                                            <p>
+                                                Nom : <strong> {{ user.last_name}}</strong>
+                                            </p>
+                                            <h6>Prénom :  <strong>{{ user.first_name}}</strong></h6>
+                                            <p>
+                                                Email : <strong> {{ user.email}}</strong>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Activités recentes</h6>
+                                            <a href="" class="tag tag-default tag-pill">html5</a>
+                                            <a href="" class="tag tag-default tag-pill">react</a>
+                                            <a href="" class="tag tag-default tag-pill">codeply</a>
+                                            <a href="" class="tag tag-default tag-pill">angularjs</a>
+                                            <a href="" class="tag tag-default tag-pill">css3</a>
+                                            <a href="" class="tag tag-default tag-pill">jquery</a>
+                                            <a href="" class="tag tag-default tag-pill">bootstrap</a>
+                                            <a href="" class="tag tag-default tag-pill">responsive-design</a>
+                                            <hr>
+                                                </div>
+                                        <div class="col-md-12">
+                                            <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right">Activités recentes</span></h4>
+                                            <table class="table table-hover table-striped">
+                                                <tbody>                                    
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                                                        </td>
+                
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                                                        </td>
+                
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!--/row-->
+                                </div>
+                                <div class="tab-pane" id="messages">
+                                    <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right">Messages recent &amp; Notifications</span></h4>
+                                    
+                                    <div class="alert alert-info alert-dismissable">
+                                        <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                                    </div>
+                                    <table class="table table-hover table-striped">
+                                        <tbody>                                    
+                                            <tr>
+                                                <td>
+                                                   <span class="pull-xs-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                   <span class="pull-xs-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                   <span class="pull-xs-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus. 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                   <span class="pull-xs-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus. 
+                                                </td>
+                                            </tr>
+                                        </tbody> 
+                                    </table>
+                                </div>
+                                <div class="tab-pane" id="edit">
+                                    <h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right">Activités recentes</span></h4>
+                                    <form class="text-center border border-light p-5" action="#!" method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                              
+                                            
+                                                        {{ u_form | crispy }}
+                                                        {{ p_form | crispy }}
+                                            
+                                                <!-- Sign up button -->
+                                                <button class="btn btn-info my-4 btn-block" type="submit">Valider</button>
+                                           
+                                            </form>
+                                      
+                                        
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 pull-lg-8 text-xs-center">
+                            <img src="{{ user.profile.image.url }}" class="rounded-circle" alt="avatar">
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <hr>
+    </div>
+    </div>
+    </main>
+    
+
+{% endblock content %}

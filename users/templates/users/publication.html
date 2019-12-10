@@ -1,0 +1,81 @@
+{% extends "users/base.html" %}
+{%block content %}
+<!--Main layout-->
+ <main>
+        <div class="container">
+    
+          <!--Navbar-->
+          <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
+    
+            <!-- Navbar brand -->
+          
+            <!-- Navbar brand -->
+          
+          </nav>
+          <!--/.Navbar-->
+    
+          <!--Section: Products v.3-->
+          <section class="text-center mb-4">
+
+
+   
+            <!--Grid row-->
+            <div class="row wow fadeIn">
+             
+                     <!--Card-->
+  <div class="card green darken-3">
+              
+        <!--Card image-->
+        
+  
+        <!--Card content-->
+        <div class="card-body text-center">
+          <!--Title-->
+          <h4 class="card-title white-text">Publier un nouveau Produit</h4>
+          <!--Text-->
+          <p class="card-text white-text">Si vous avez été redirigé sur cette page , ce n'est pas une erreur.</p>
+              En effet vous avez essayéde publier un produit et son autorisé à le faire uniquement les utilisateurs dont les statut ont été 
+              confirmé par l'administration.
+        
+          </p>
+          <a href="#" class="btn btn-outline-white btn-md waves-effect">Faire une demande </a>
+        </div>
+  
+      </div>
+      <!--/.Card-->        
+                    
+             </div>
+    
+          </section>
+          <!--Section: Products v.3-->
+          
+          <!--Pagination-->
+          {% if is_paginated %}
+            {% if page_obj.has_previous %}
+                <a class="btn btn-outline-info mb-4" href="?page=1">Debut</a>
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number}}">Précédent</a>
+            {% endif%}
+            {% for num in page_obj.paginator.page_range%}
+                {% if page_obj.number == num %}
+                 <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Suivant</a>
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Fin</a>
+            {% endif%}
+
+          {% endif %}
+          <!--Pagination-->
+    
+        </div>
+      </main>
+      <!--Main layout-->
+{% endblock content %}  
+  
+  
+  
+  
+ 

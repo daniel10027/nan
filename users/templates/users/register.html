@@ -1,0 +1,47 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{%block content %}
+
+
+        <div class="container">
+              <!--Navbar-->
+         
+              <!--/.Navbar-->
+            <div class="container mt-5" >
+              <div class="d-flex justify-content-center">
+
+                          
+                        <!-- Default form register -->
+            <form class="text-center border border-light p-5" action="#!" method="POST">
+              {% csrf_token %}
+
+                  <p class="h4 mb-4">Inscription</p>
+              
+                          {{ form | crispy }}
+              
+                  <!-- Sign up button -->
+                  <button class="btn btn-info my-4 btn-block" type="submit">Valider</button>
+              
+                  <p>En  cliquant
+                      <em>Inscription </em> Vous etes d'accord avec nos termes et services terms et services </p>
+                    
+              
+              </form>
+              
+            
+              </div>
+              <br>  
+                   
+              <div class="d-flex justify-content-center">
+                  <small class="text-muted">Déja inscrit ?
+                          <a class="ml-2" href="{% url 'login' %}">Connexion</a>
+                            
+                        </small>
+              </div>
+            </div>               
+                
+         
+        </div>
+
+     
+{% endblock content %}

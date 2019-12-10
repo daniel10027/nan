@@ -1,0 +1,301 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Agrivoire 2019</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'users/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'users/css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{% static 'users/css/style.min.css' %}" rel="stylesheet">
+  <style type="text/css">
+    html,
+    body,
+    header,
+    .carousel {
+      height: 60vh;
+    }
+
+    @media (max-width: 740px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+
+    @media (min-width: 800px) and (max-width: 850px) {
+
+      html,
+      body,
+      header,
+      .carousel {
+        height: 100vh;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand waves-effect" href="{% url 'site-home' %}">
+        <strong class="blue-text">AGRIVOIRE</strong>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link waves-effect" href="{% url 'site-home' %}">Accueil
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link waves-effect" href="#">Actualité</a>
+            </li>
+      {% if user.is_authenticated%}
+          <li class="nav-item">
+              <a class="nav-link waves-effect" href="{% url 'profile' %}"
+               >Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link waves-effect" href="{% url 'logout' %}"
+                 >Logout</a>
+              </li>
+      {% else %}
+      <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'login' %}">Connexion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'register' %}"
+           >Inscription</a>
+        </li>
+      {% endif %}
+         
+   
+        </ul>
+
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+         
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link border border-light rounded waves-effect"
+             >
+              AGRIVOIRE
+            </a>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  <!-- Navbar -->
+  <main class="mt-5 pt-4">
+        <div class="container dark-grey-text mt-5">
+
+                <!--Grid row-->
+                <div class="row wow fadeIn">
+        
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+        
+                    <img src="{{ object.image1.url }}" class="img-fluid" height="100" width="400">
+        
+                </div>
+                <!--Grid column-->
+        
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+        
+                    <!--Content-->
+                    <div class="p-4">
+        
+                    <div class="mb-3">
+                        <a href="">
+                        Titre : <span class="badge purple mr-1">{{object.titre}}</span>
+                        </a>
+                        <br>
+                        <a href="">
+                        Publié le :<span class="badge blue mr-1">{{object.date_post }}</span>
+                        </a>
+                        <br>
+                        <a href="{% url 'user-produits' object.auteur.username %}">
+                       Par : <span class="badge red mr-1"><h7>{{object.auteur.username}}</h7></span>
+                        </a>
+                        <hr>
+                        <a href="">
+                                Prix : <span class="badge red mr-1"><h7> {{object.prix}}</h7></span>
+                                 </a>
+                    </div>
+        
+                    <p class="lead">
+                       
+                            Description:  
+                    </p>
+                     <p>{{object.description}}.</p>
+                    {% if object.auteur == user %}
+                    
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'produit-update' object.id %}">Modifier</a>
+                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'produit-delete' object.id %}">Supprimer</a>
+        
+                    </form>
+                    {% else %}
+                        {% if user.is_authenticated %}
+
+                         
+                            <form action="{% url 'charge' %}" method="post">
+                              {% csrf_token %}
+                              <input type="hidden" class="form-control" name="descriptionn" value="Achat de {{object.description}}" class="field left" readonly>
+                              <input type="hidden" class="form-control"  name="montant" value="{{object.prix}}" class="field left" readonly>
+                              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                      data-key="{{ key }}"
+                                     
+                                      data-locale="fr"
+                                      data-currency= "xof">
+                                      
+                                      
+                              </script>
+                            </form>
+                         
+                        {% else %}
+                            <a class="btn btn-info btn-sm mt-1 mb-1" href="#">Acheter</a>
+                        {% endif %}
+                    {% endif %}
+                   
+        
+                    </div>
+                    <!--Content-->
+        
+                </div>
+                <!--Grid column-->
+        
+                </div>
+                <!--Grid row-->
+        
+                <hr>
+        
+                <!--Grid row-->
+                <div class="row d-flex justify-content-center wow fadeIn">
+        
+                <!--Grid column-->
+                <div class="col-md-6 text-center">
+        
+                    <h4 class="my-4 h4">Plus +</h4>
+        
+                    
+        
+                </div>
+                <!--Grid column-->
+        
+                </div>
+                <!--Grid row-->
+        
+                <!--Grid row-->
+                <div class="row wow fadeIn">
+        
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-12 mb-4">
+        
+                    <img src="{{ object.image1.url }}" class="img-fluid" alt="">
+        
+                </div>
+                <!--Grid column-->
+        
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+        
+                    <img src="{{ object.image2.url }}" class="img-fluid" alt="">
+        
+                </div>
+                <!--Grid column-->
+        
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+        
+                    <img src="{{ object.image3.url }}" class="img-fluid" alt="">
+        
+                </div>
+                <!--Grid column-->
+        
+                </div>
+                <!--Grid row-->
+        
+            </div>
+            </main>
+            <!--Main layout-->
+
+  <!--Footer-->
+  <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+    <!--Call to action-->
+    <div class="pt-4">
+      <a class="btn btn-outline-white" href="#"
+        role="button">Nous contacter
+        <i class="fas fa-phone ml-2"></i>
+      </a>
+      <a class="btn btn-outline-white" href="#" role="button">Devenir Partenaire
+        <i class="fas fa-plus ml-2"></i>
+      </a>
+    </div>
+    <!--/.Call to action-->
+
+    
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+      © 2019 Copyright:
+      <a href="#"> Team Analyst 225 </a>
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
+  <!--/.Footer-->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="{% static 'users/js/jquery2.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'users/js/popper.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'users/js/bootstrap.min.js' %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'users/js/mdb.min.js' %}"></script>
+  <!-- Initializations -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+
+  </script>
+</body>
+
+</html>
